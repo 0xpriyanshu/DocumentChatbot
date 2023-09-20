@@ -11,6 +11,8 @@ from langchain.chains.question_answering import load_qa_chain
 from langchain.callbacks import get_openai_callback
 import os
 
+openai_api_key = os.environ.get('OPENAI_API_KEY')
+
 # Sidebar contents
 st.sidebar.title('🤗💬 LLM Chat App')
 st.sidebar.write('Made with ❤️ by [0xpriyanshu](https://medium.com/naukri-engineering/building-conversational-resume-search-chatbot-using-langchain-pinecone-openai-ffb3b60f5c5f)')
