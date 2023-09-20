@@ -11,13 +11,15 @@ from langchain.chains.question_answering import load_qa_chain
 from langchain.callbacks import get_openai_callback
 import os
 
-openai_api_key = st.secrets['OPENAI_API_KEY']
 
 # Sidebar contents
 st.sidebar.title('🤗💬 LLM Chat App')
 st.sidebar.write('Made with ❤️ by [0xpriyanshu](https://medium.com/naukri-engineering/building-conversational-resume-search-chatbot-using-langchain-pinecone-openai-ffb3b60f5c5f)')
 
 def main():
+
+    openai_api_key = st.secrets['OPENAI_API_KEY']
+    
     st.header("Priyanshu's Chat with your PDF App 💬")
 
     # Upload PDF files
@@ -29,7 +31,6 @@ def main():
             text = ""
             for page in pdf_reader.pages:
                 text += page.extract_text()
-
             text_splitter = RecursiveCharacterTextSplitter(
                 chunk_size=1000,
                 chunk_overlap=200,
