@@ -18,6 +18,11 @@ jobs:
         with:
           python-version: 3.11.4  # Choose the Python version you need
 
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r $GITHUB_WORKSPACE/requirements.txt
+          
       - name: Retrieve Secret
         run: echo "My secret is ${{ secrets.OPENAI_API_KEY }}"
         env:
