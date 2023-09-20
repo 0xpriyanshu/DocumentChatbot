@@ -11,9 +11,6 @@ from langchain.chains.question_answering import load_qa_chain
 from langchain.callbacks import get_openai_callback
 import os
 
-load_dotenv()
-API_KEY=os.getenv('OPENAI_API_KEY')
-
 # Sidebar contents
 st.sidebar.title('🤗💬 LLM Chat App')
 st.sidebar.write('Made with ❤️ by [0xpriyanshu](https://medium.com/naukri-engineering/building-conversational-resume-search-chatbot-using-langchain-pinecone-openai-ffb3b60f5c5f)')
@@ -45,7 +42,7 @@ def main():
                 with open(f"{store_name}.pkl", "rb") as f:
                     VectorStore = pickle.load(f)
             else:
-                embeddings = OpenAIEmbeddings(openai_api_key=API_KEY)
+                embeddings = OpenAIEmbeddings(openai_api_key=OPENAI_API_KEY)
                 VectorStore = FAISS.from_texts(chunks, embedding=embeddings)
                 with open(f"{store_name}.pkl", "wb") as f:
                     pickle.dump(VectorStore, f)
@@ -56,7 +53,7 @@ def main():
             if query:
                 docs = VectorStore.similarity_search(query=query, k=3)
 
-                llm = OpenAI(openai_api_key=API_KEY)
+                llm = OpenAI(openai_api_key=OPENAI_API_KEY)
                 chain = load_qa_chain(llm=llm, chain_type="stuff")
                 with get_openai_callback() as cb:
                     response = chain.run(input_documents=docs, question=query)
