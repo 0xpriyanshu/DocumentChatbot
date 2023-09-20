@@ -1,0 +1,27 @@
+name: Retrieve Secret from GitHub Secrets
+
+on:
+  push:
+    branches:
+      - main  # Replace with the branch you want to trigger on
+
+jobs:
+  retrieve_secret:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.11.4  # Choose the Python version you need
+
+      - name: Retrieve Secret
+        run: echo "My secret is ${{ secrets.OPENAI_API_KEY }}"
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+
+      - name: Run Your Python Script
+        run: python app.py  # Replace with your script's name
