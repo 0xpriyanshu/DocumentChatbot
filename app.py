@@ -13,6 +13,7 @@ import os
 
 headers= {
     "authorisation": st.secrets['OPENAI_API_KEY'],
+    "content-type":"application/json"
 }
 
 
